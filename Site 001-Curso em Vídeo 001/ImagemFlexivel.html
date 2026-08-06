@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem Flexível</title>
+    <link rel="shortcut icon" href="midias/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        picture {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Desafio da Imagem Flexível</h1>
+    <p>Observe como a imagem se adapta ao tamanho da janela.</p>
+    <picture>
+        <source media="(min-width: 1200px)" srcset="midias/paisagem-g.png" type="image/png">
+        <source media="(min-width: 740px)" srcset="midias/paisagem-m.png" type="image/png">
+        <img src="midias/paisagem-p.png" alt="Imagem de uma mulhar de costas pequena">
+    </picture>
+    <p><a href="index.html" target="_self" rel="prev">Voltar para a Home</a></p>
+</body>
+</html>

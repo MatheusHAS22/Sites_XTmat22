@@ -1,0 +1,28 @@
+@charset "UTF-8";
+body {
+    font-size: 20px;
+    background-color: rgb(10, 12, 20);
+    color: rgb(232, 232, 232);
+    text-align: justify;
+}
+h1 {
+    font-size: 3em;
+}
+/* Estado normal do link */
+a {
+  color: #00ffff;
+  text-decoration: none; /* Opcional: remove o sublinhado */
+}
+/* Quando o link já foi visitado */
+a:visited {
+  color: #2701ff; 
+}
+/* Quando passa o mouse por cima do link */
+a:hover {
+  color: #00ebfc;
+  text-decoration: underline; /* Adiciona sublinhado no hover */
+}
+/* No momento em que o link é clicado */
+a:active {
+  color: #00ebfc;
+}
