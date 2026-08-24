@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+@font-face {
+    font-family: 'Android';
+    src: url(../pacote-projeto-d010/fontes/idroid.otf) format('opentype');
+    font-weight: normal;
+}
+
+:root { /*É para usar variaveis em css*/
+    --white-padrao: aliceblue;
+
+    --home-color0: #648de5;
+    --home-color1: #473fb4;
+    --home-color2: #0E0C34;
+
+    --android-color0: #87EC1A;
+    --android-color1: #78C259;
+    --android-color2: #81AF67;
+    --android-color3: #3D6F06;
+    --android-color4: #2B4223;
+    --android-color5: #E4FF8F;
+
+    --espaco-color0: #52c0d99f;
+    --espaco-color1: #0E1D73;
+    --espaco-color2: #011826;
+
+    --cordelcolor0: #eea91e50;
+    --cordelcolor1: #0000003d;
+
+    --font-padrao: Arial, Verdana, Helvetica, sans-serif;
+    --font-android: 'Android', cursive;
+    --font-destaque: 'Lexend', sans-serif;
+}
+
+.nostyle, .nostyle:visited /* precisa apenas colocar nostyle para ambos funcionarem no html */ { /* usar em funções com estilos padrões como a */
+    color: inherit; /* Herda a cor do texto do elemento pai */
+    text-decoration: none;
+}
+
+.bloco { /* usar no que quer tranformar em bloco */
+    display: inline-block;
+    vertical-align: top; /* Garante que os blocos fiquem alinhados pelo topo */
+}
+
+.icone { /* usar em img */
+    height: auto;
+    border-radius: 50%;
+}
+
+.menu-nav { /* usar em nav */
+    display: flex;
+    align-items: flex-end;
+}
+.menu-div { /* usar na div da nav */
+    display: inline-block;
+    margin: 0px;
+    padding: 20px 30px 15px 30px;
+    height: 21px;
+}
+.menu-p { /* usar no p da div da nav */
+    margin: 0px;
+}
+
+body {
+    font-family: var(--font-padrao);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+header {
+    width: 100%;
+    height: auto;
+    border-width: 0px 0px 5px 0px;
+    border-style: solid;
+    margin: 0px;
+}
+h1 {
+    font-family: var(--font-destaque);
+    font-size: 2.5em;
+}
+
+main {
+    text-align: justify;
+}
+main > article > p {
+    text-indent: 30px;
+    line-height: 2em;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+aside {
+    font-size: 0.80em;
+}
+
+picture {
+    display: flex;
+    justify-content: center;
+}
+
+iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Mantem a proporção */ 
+    height: auto;
+}
+
+footer {
+    width: 100%;
+    height: auto;
+}

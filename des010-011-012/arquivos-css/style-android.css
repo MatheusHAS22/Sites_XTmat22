@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+body {
+    background-color: var(--android-color2);
+}
+
+header {
+    text-align: center;
+    color: var(--white-padrao);
+    background-image: linear-gradient(to top, var(--android-color3), var(--android-color1));
+    padding: 20px 0px 0px 0px;
+    border-bottom-color: var(--android-color0);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.400);
+}
+header > nav > a > div:hover {
+    background-color: var(--android-color0);
+}
+
+main {
+    background-color: var(--white-padrao);
+    max-width: 800px;
+    width: 90%;
+    padding: 20px;
+}
+main h2{
+    color: var(--android-color3);
+    font-family: var(--font-android);
+    background-image: linear-gradient(to right, var(--android-color1), transparent);
+}
+main a {
+    color: var(--android-color3);
+    font-weight: bold;
+    text-decoration: underline;
+}
+main a:hover {
+    color: var(--android-color1);
+}
+main a:visited {
+    color: var(--android-color4);
+}
+main a:visited:hover {
+    color: var(--android-color1);
+}
+iframe {
+    max-width: 800px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.400);
+}
+
+#extras {
+    background-color: var(--android-color5);
+    padding: 20px;
+    margin: 30px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--android-color1);
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.400);
+}
+#extras h2 {
+    font-family: var(--font-destaque);
+    color: black;
+    background-image: none;
+    background-color: var(--android-color1);
+    padding: 0px 10px 10px 10px ;
+    margin: -20px -20px 0px -20px;
+}
+#extras ul {
+    list-style-type: '\2714\00A0\00A0'; /* Isso pode não funcionar em alguns navegadores, 00A0 é espaço */
+    columns: 2;
+}
+
+footer {
+    color: var(--white-padrao);
+    background-color: var(--android-color4);
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.400);
+}
+footer > aside {
+    margin: 30px;
+}
