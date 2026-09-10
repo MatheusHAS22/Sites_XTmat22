@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apresentação - Émile Durkheim</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  
+  .presentation-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff;
+    padding: 4vh 5vw;
+    overflow-y: auto;
+    z-index: 1;
+  }
+
+  .slide.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  /* Animações de Transição via JavaScript */
+  .slide.exit-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+    animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .slide.enter-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .slide.exit-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+    animation: slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .slide.enter-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-20vw); opacity: 0; }
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(20vw); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes slideOutRight {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(20vw); opacity: 0; }
+  }
+
+  @keyframes slideInLeft {
+    from { transform: translateX(-20vw); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #1a365d;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .slide-title {
+    font-size: clamp(2rem, 2.8vw, 3.2rem);
+    color: #1a365d;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .slide-number {
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    background-color: #1a365d;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .page-location {
+    font-size: clamp(1rem, 1.3vw, 1.4rem);
+    color: #4a5568;
+    background-color: #edf2f7;
+    padding: 8px 18px;
+    border-left: 6px solid #2b6cb0;
+    margin-bottom: 20px;
+    border-radius: 0 6px 6px 0;
+    font-weight: 500;
+  }
+
+  /* Grid Layout para Conteúdo e Imagem */
+  .slide-content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .slide-content-full {
+    width: 100%;
+  }
+
+  .slide-image-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .slide-image-box img {
+    width: 100%;
+    max-height: 48vh;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border: 1px solid #e2e8f0;
+  }
+
+  .image-caption {
+    margin-top: 10px;
+    font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+    color: #64748b;
+    font-style: italic;
+    text-align: center;
+  }
+
+  p {
+    font-size: clamp(1.2rem, 1.6vw, 1.9rem);
+    line-height: 1.5;
+    color: #2d3748;
+    margin-top: 10px;
+  }
+
+  ul, ol {
+    margin: 15px 0;
+    padding-left: 35px;
+  }
+
+  li {
+    margin-bottom: 16px;
+    line-height: 1.4;
+    font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+    color: #2d3748;
+  }
+
+  .compact-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
+    margin-top: 10px;
+  }
+
+  .compact-table th {
+    background-color: #2b6cb0;
+    color: white;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+  }
+
+  .compact-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    line-height: 1.3;
+  }
+
+  .compact-table tr:nth-child(even) {
+    background-color: #f7fafc;
+  }
+
+  .highlight {
+    font-weight: bold;
+    color: #1a365d;
+  }
+
+  /* Painel de Controle Flutuante */
+  .controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px 24px;
+    border-radius: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    opacity: 0.0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  .controls:hover {
+    opacity: 1;
+  }
+
+  /* Bolinhas de Navegação Rápida */
+  .dots-container {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .dot:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    transform: scale(1.25);
+  }
+
+  .dot.active {
+    background-color: #3182ce;
+    transform: scale(1.35);
+    box-shadow: 0 0 8px rgba(49, 130, 206, 0.8);
+  }
+
+  .btn {
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+
+  .btn:hover {
+    background: #3182ce;
+  }
+
+  .btn:disabled {
+    background: #4a5568;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .counter {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-width: 90px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active">
+    <div class="slide-header">
+      <h2 class="slide-title">Émile Durkheim: A Sociologia como Ciência e a Educação como Processo Social</h2>
+      <span class="slide-number">Slide 1 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Capa e Cabeçalho | Artigo: p. 1126 | PDF: p. 1</div>
+    <div class="slide-content-grid">
+      <div>
+        <h3 style="color:#2b6cb0; font-size: clamp(1.6rem, 2vw, 2.3rem); margin-top:10px;">Síntese Acadêmica do Artigo</h3>
+        <p><strong>Autor do Artigo:</strong> Ediano Dionisio do Prado (IFSULDEMINAS / UNICAMP)</p>
+        <p><strong>Publicação:</strong> <em>Revista Faculdades do Saber</em>, 07(14): 1126-1140, 2022.</p>
+        <hr style="border:0; border-top:2px solid #e2e8f0; margin:20px 0;">
+        <p>Apresentação detalhada da obra de Émile Durkheim, abordando a constituição da Sociologia como ciência autônoma, a definição do fato social, a questão da ordem/anomia e a teoria da educação como processo de socialização metódica.</p>
+      </div>
+      <div class="slide-image-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Emile_Durkheim.jpg" alt="Émile Durkheim">
+        <div class="image-caption">📷 Émile Durkheim (1858–1917)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Estrutura Geral do Trabalho (As 10 Partes)</h2>
+      <span class="slide-number">Slide 2 / 22</span>
+    </div>
+    <div class="page-location">📍 Mapeamento Completo do Material | Artigo: pp. 1126–1140 | PDF: pp. 1–15</div>
+    <div class="slide-content-full">
+      <table class="compact-table">
+        <thead>
+          <tr>
+            <th style="width: 8%;">Parte</th>
+            <th style="width: 52%;">Tema / Conteúdo Principal</th>
+            <th style="width: 18%;">Páginas (Artigo)</th>
+            <th style="width: 12%;">Pág. (PDF)</th>
+            <th style="width: 10%;">Slides</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Parte 1</strong></td><td>Introdução & Natureza Social do Processo Educacional</td><td>1126 – 1127</td><td>1 – 2</td><td>3 – 4</td></tr>
+          <tr><td><strong>Parte 2</strong></td><td>Contexto Histórico & Emergência da Sociologia (Durkheim)</td><td>1127 – 1128</td><td>2 – 3</td><td>5 – 6</td></tr>
+          <tr><td><strong>Parte 3</strong></td><td>O Método Positivista e Regras de Investigação</td><td>1128 – 1130</td><td>3 – 5</td><td>7 – 8</td></tr>
+          <tr><td><strong>Parte 4</strong></td><td>Definição e as 7 Características do Fato Social</td><td>1129 – 1131</td><td>4 – 6</td><td>9 – 10</td></tr>
+          <tr><td><strong>Parte 5</strong></td><td>Primado do Social, Consciência Coletiva e Religião</td><td>1131 – 1133</td><td>6 – 8</td><td>11 – 12</td></tr>
+          <tr><td><strong>Parte 6</strong></td><td>A Questão da Ordem, Anomia e Divisão do Trabalho</td><td>1133 – 1135</td><td>8 – 10</td><td>13 – 14</td></tr>
+          <tr><td><strong>Parte 7</strong></td><td>Solidariedade Mecânica vs. Solidariedade Orgânica</td><td>1135</td><td>10</td><td>15</td></tr>
+          <tr><td><strong>Parte 8</strong></td><td>O Suicídio como Fato Social e Tipologia Tripartite</td><td>1135 – 1136</td><td>10 – 11</td><td>16 – 17</td></tr>
+          <tr><td><strong>Parte 9</strong></td><td>Sociologia da Educação e Socialização Metódica</td><td>1136 – 1138</td><td>11 – 13</td><td>18 – 19</td></tr>
+          <tr><td><strong>Parte 10</strong></td><td>Educação x Pedagogia, Prática Escolar e Conclusão</td><td>1138 – 1140</td><td>13 – 15</td><td>20 – 22</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 1: Introdução à Sociologia da Educação</h2>
+      <span class="slide-number">Slide 3 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1126–1127 | PDF: pp. 1–2</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Inseparabilidade do Social e Educacional:</span> Para compreender o processo educacional, a escola e o ato de ensinar/aprender, é indispensável analisar a estrutura da sociedade.</li>
+        <li><span class="highlight">A Educação como Processo Social:</span> "Ninguém escapa da educação" (Brandão, 2007). Ela ocorre em casa, na rua, na igreja e na escola.</li>
+        <li><span class="highlight">Ausência de Modelo Único:</span> A educação varia segundo a estrutura do grupo (sociedades tribais, agrícolas ou urbanas possuem exigências educativas totalmente distintas).</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" alt="Sala de Aula">
+        <div class="image-caption">🖼️ Parte 1: A sala de aula como ambiente primário de socialização.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 1: O Ideal Educacional em Durkheim</h2>
+      <span class="slide-number">Slide 4 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1127 | PDF: p. 2</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Moldagem do Indivíduo:</span> O objetivo do grupo é "modelar" o indivíduo nos valores e crenças locais, preparando-o para viver naquela sociedade específica.</li>
+        <li><span class="highlight">Reprodução da Ordem Social:</span> Transmissão de habilidades e valores intergeracionais para garantir a perfeição social.</li>
+        <li><span class="highlight">Papel da Sociologia:</span> Ciência moderna que encara o ensino e a escola como partes integrantes da totalidade social.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 2: Contexto Histórico e a Sociedade Industrial</h2>
+      <span class="slide-number">Slide 5 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1127–1128 | PDF: pp. 2–3</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Duas Revoluções Fundamentais:</span> Revolução Francesa e Revolução Industrial (séculos XVIII e XIX).</li>
+        <li><span class="highlight">Transformações Estruturais:</span> Ruína do feudalismo e surgimento da urbanização, industrialização e conflitos de classe.</li>
+        <li><span class="highlight">Aturdimento Psíquico (Berman, 1986):</span> A rápida dissolução dos valores tradicionais gerou angústia, transformando a sociedade em um <em>objeto a ser investigado</em>.</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=800&q=80" alt="Universidade e Conhecimento">
+        <div class="image-caption">🖼️ Parte 2: O berço acadêmico europeu do século XIX.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 2: A Trajetória de Émile Durkheim</h2>
+      <span class="slide-number">Slide 6 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1128 | PDF: p. 3</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Dados Biográficos (1858–1917):</span> Nascido em Épinal (França); lecionou em Bordéus (1ª cátedra de Sociologia) e na Sorbonne.</li>
+        <li><span class="highlight">Herança Positivista:</span> Continuador de Auguste Comte, focou no consenso e na reordenação moral.</li>
+        <li><span class="highlight">Principais Obras:</span> <em>Da Divisão do Trabalho Social</em> (1893), <em>As Regras do Método Sociológico</em> (1895), <em>O Suicídio</em> (1897), <em>As Formas Elementares da Vida Religiosa</em> (1912) e <em>Educação e Sociologia</em> (1922).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 3: O Método Positivista e a Sociologia</h2>
+      <span class="slide-number">Slide 7 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1128–1129 | PDF: pp. 3–4</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Emancipação Científica:</span> Separação rígida entre Sociologia, Filosofia e Psicologia Individual.</li>
+        <li><span class="highlight">Eixo Central da Obra (Aron, 1990):</span>
+          <ol style="margin-top:10px;">
+            <li>Definição rigorosa do objeto e método.</li>
+            <li>Preocupação com a reorganização moral (ordem social).</li>
+            <li>Preponderância da totalidade social sobre o indivíduo.</li>
+          </ol>
+        </li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80" alt="Investigação Científica">
+        <div class="image-caption">🖼️ Parte 3: O rigor empírico e observação sistemática.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 3: Regras Fundamentais do Método Sociológico</h2>
+      <span class="slide-number">Slide 8 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1130 | PDF: p. 5</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Regra de Ouro:</span> "Tratar os fatos sociais como coisas" (dados externos a serem observados do exterior).</li>
+        <li><span class="highlight">Passos do Rigor Científico:</span>
+          <ul>
+            <li>Distanciamento e neutralidade do pesquisador.</li>
+            <li>Eliminação das <em>pré-noções</em> (preconceitos/juízos de valor).</li>
+            <li>Refutação de teorias prévias e uso do método comparativo.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 4: O Objeto da Sociologia – O Fato Social</h2>
+      <span class="slide-number">Slide 9 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1129 | PDF: p. 4</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Definição Clássica:</span> "Maneiras de agir, de pensar e de sentir, exteriores ao indivíduo, e que são dotadas de um poder de coerção em virtude do qual se lhe impõem" (Durkheim, 2007).</li>
+        <li><span class="highlight">Domínio Próprio:</span> Não se confundem com fenômenos orgânicos (fisiologia) nem psíquicos (consciência individual).</li>
+        <li><span class="highlight">Exemplos:</span> Direito, religião, idioma, sistema monetário, costumes e educação.</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80" alt="Regras Sociais e Convivência">
+        <div class="image-caption">🖼️ Parte 4: Fatos sociais e o comportamento coletivo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 4: As 7 Características do Fato Social</h2>
+      <span class="slide-number">Slide 10 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1130–1131 (Nota de Rodapé 2) | PDF: pp. 5–6</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">1. Anterioridade:</span> Existem antes do nascimento do indivíduo.</li>
+        <li><span class="highlight">2. Exterioridade:</span> Existem fora da consciência individual.</li>
+        <li><span class="highlight">3. Superioridade:</span> A sociedade prevalece sobre a vontade individual.</li>
+        <li><span class="highlight">4. Coercividade:</span> Exercem pressão moral ou legal para conformação.</li>
+        <li><span class="highlight">5. Generalidade:</span> Presentes na totalidade ou maioria dos membros do grupo.</li>
+        <li><span class="highlight">6. Especificidade:</span> Natureza única (<em>sui generis</em>).</li>
+        <li><span class="highlight">7. Irredutibilidade:</span> Não se reduzem à soma das partes individuais.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 5: O Primado da Sociedade sobre o Indivíduo</h2>
+      <span class="slide-number">Slide 11 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1131–1132 | PDF: pp. 6–7</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Prioridade Histórica e Lógica:</span> A sociogênese antecede a psicogênese. O indivíduo nasce da sociedade.</li>
+        <li><span class="highlight">Consciência Coletiva:</span> Conjunto das crenças e sentimentos comuns que forma um sistema com vida própria.</li>
+        <li><span class="highlight">Autoridade Moral:</span> A sociedade exerce coerção pelo respeito sacralizado que inspira.</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80" alt="Sagrado e Consciência Coletiva">
+        <div class="image-caption">🖼️ Parte 5: O sagrado como expressão da força coletiva.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 5: A Deificação do Social e a Religião</h2>
+      <span class="slide-number">Slide 12 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1133 | PDF: p. 8</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">A Sociedade como Divindade:</span> Em <em>As Formas Elementares da Vida Religiosa</em>, conclui-se que ao adorar um Deus ou Totem, o homem adora a própria força da sociedade.</li>
+        <li><span class="highlight">"A sociedade é uma máquina de criar deuses":</span> O coletivo transcende os indivíduos, alimenta a geração presente e sobreviverá às futuras.</li>
+        <li><span class="highlight">O Estado como "Médico Social":</span> Instrumento encarregado de executar reformas morais e sanar patologias sociais (Lucena, 2010).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 13 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 6: A Questão da Ordem e o Diagnóstico da Anomia</h2>
+      <span class="slide-number">Slide 13 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1133–1134 | PDF: pp. 8–9</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Crise Moral (não econômica):</span> A instabilidade moderna decorre do descompasso entre as mudanças econômicas e a adequação das normas morais.</li>
+        <li><span class="highlight">Conceito de Anomia:</span> Ausência ou fragilidade de regras claras para orientar a conduta.</li>
+        <li><span class="highlight">Física Social:</span> A Sociologia deve detectar e curar a anomia, criando uma ética científica e laica.</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Divisão do Trabalho Industrial">
+        <div class="image-caption">🖼️ Parte 6: A indústria e a divisão técnica de funções.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 14 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 6: A Divisão do Trabalho Social</h2>
+      <span class="slide-number">Slide 14 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1134–1135 | PDF: pp. 9–10</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Contraponto a Karl Marx:</span> Para Durkheim, a divisão do trabalho não gera alienação/embrutecimento, mas sim coesão e solidariedade moral.</li>
+        <li><span class="highlight">Função Principal:</span> O efeito moral (criar laços de dependência mútua entre especialistas) supera o simples efeito econômico.</li>
+        <li><span class="highlight">Integração Social:</span> A especialização profissional torna os sujeitos interdependentes no capitalismo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 15 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 7: Solidariedade Mecânica vs. Orgânica</h2>
+      <span class="slide-number">Slide 15 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1135 | PDF: p. 10</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Solidariedade Mecânica:</span>
+          <ul>
+            <li>Sociedades pré-capitalistas/tradicionais.</li>
+            <li>Baseada na <em>semelhança</em> de funções e forte religiosidade.</li>
+            <li>Consciência individual absorvida pela coletiva.</li>
+          </ul>
+        </li>
+        <li><span class="highlight">Solidariedade Orgânica:</span>
+          <ul>
+            <li>Sociedades capitalistas/industriais.</li>
+            <li>Baseada na <em>diferenciação</em> e interdependência de funções.</li>
+            <li>Abertura para a individualidade e autonomia.</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Cidade Moderna">
+        <div class="image-caption">🖼️ Parte 7: A metrópole e a solidariedade orgânica.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 8: O Suicídio como Fenômeno Sociológico</h2>
+      <span class="slide-number">Slide 16 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1135–1136 | PDF: pp. 10–11</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Superação da Explicação Psicológica:</span> O suicídio é um ato cujas causas reais são de natureza social (correntes suicidógenas).</li>
+        <li><span class="highlight">Sintoma Patológico:</span> Reflete a falta de integração ou a desintegração moral da sociedade sobre o sujeito.</li>
+        <li><span class="highlight">Demonstração Metodológica:</span> Prova prática de que forças coletivas agem sobre as decisões individuais.</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Dados e Estatísticas">
+        <div class="image-caption">🖼️ Parte 8: Análise estatística de fatos sociais.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 8: Tipologia Tripartite do Suicídio</h2>
+      <span class="slide-number">Slide 17 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1136 | PDF: p. 11</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">1. Suicídio Egoísta:</span> Baixa integração do indivíduo nos grupos (família, igreja). O indivíduo isola-se e prevalece sobre o grupo.</li>
+        <li><span class="highlight">2. Suicídio Altruísta:</span> Excessiva integração social. O indivíduo anula sua vida em favor do dever coletivo (mártires, fanatismo).</li>
+        <li><span class="highlight">3. Suicídio Anômico:</span> Provocado por crises e desregulação das normas morais (anomia). Típico das transformações da modernidade.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 18 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 9: Educação e Sociologia – Socialização Metódica</h2>
+      <span class="slide-number">Slide 18 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1136–1137 | PDF: pp. 11–12</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Refutação das Visões Anteriores:</span> Crítica a Kant e Stuart Mill.</li>
+        <li><span class="highlight">Definição de Educação (Durkheim, 1975):</span> Ação exercida pelas gerações adultas sobre as gerações jovens para desenvolver estados físicos, intelectuais e morais exigidos pela sociedade.</li>
+        <li><span class="highlight">Transformação do Sujeito:</span> Converte o "ser natural e egoísta" em um "ser social e moral".</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Processo Educativo">
+        <div class="image-caption">🖼️ Parte 9: O professor como condutor da socialização.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 19 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 9: O Duplo Caráter da Educação (Uno e Múltiplo)</h2>
+      <span class="slide-number">Slide 19 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1137–1138 | PDF: pp. 12–13</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Dimensão Una (Homogeneidade):</span> Fixa na criança semelhanças essenciais e valores morais comuns indispensáveis à coesão coletiva.</li>
+        <li><span class="highlight">Dimensão Múltipla (Diferenciação):</span> Promove a especialização exigida pela divisão do trabalho segundo a profissão, classe ou meio específico.</li>
+        <li><span class="highlight">Papel do Estado:</span> A educação é função essencialmente social e não pode ser abandonada a particulares. Cabe ao Estado reger seus princípios.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 20 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 10: Educação vs. Pedagogia</h2>
+      <span class="slide-number">Slide 20 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1138 | PDF: p. 13</div>
+    <div class="slide-content-grid">
+      <ul>
+        <li><span class="highlight">Educação:</span> Prática social, ação contínua e permanente exercida pelos adultos sobre os jovens no dia a dia. É a <em>matéria-prima</em>.</li>
+        <li><span class="highlight">Pedagogia:</span> Teoria e reflexão sobre os sistemas educativos. Presta auxílio à prática, buscando ajustar a escola às necessidades da época.</li>
+        <li><span class="highlight">Sociologia e Pedagogia:</span> A Sociologia determina os fins da educação ao interpretar a escola como um microcosmo social (Ferraro, 2016).</li>
+      </ul>
+      <div class="slide-image-box">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Estudo e Pedagogia">
+        <div class="image-caption">🖼️ Parte 10: Teoria pedagógica e prática reflexiva.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 21 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 10: Contribuições para a Prática Escolar</h2>
+      <span class="slide-number">Slide 21 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: p. 1139 | PDF: p. 14</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Defesa da Escola Pública Laica:</span> Promoção de uma moral inteiramente racional e científica em substituição aos dogmas religiosos.</li>
+        <li><span class="highlight">Temas Relevantes Aplicados (Borges, 1997):</span>
+          <ul>
+            <li>Disciplina e psicologia da criança.</li>
+            <li>Penalidades e recompensas escolares.</li>
+            <li>Altruísmo infantil e influências do meio escolar.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 22 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="slide-title">Parte 10: Considerações Finais do Artigo</h2>
+      <span class="slide-number">Slide 22 / 22</span>
+    </div>
+    <div class="page-location">📍 Localização: Artigo: pp. 1139–1140 | PDF: pp. 14–15</div>
+    <div class="slide-content-full">
+      <ul>
+        <li><span class="highlight">Consolidação Científica:</span> Durkheim estabeleceu a Sociologia como ciência rigorosa com objeto e métodos delimitados.</li>
+        <li><span class="highlight">Educação como Socialização:</span> Evidenciou que a educação é a força integradora que harmoniza os interesses individuais com os sociais.</li>
+        <li><span class="highlight">Legado Durkheimiano:</span> Alargou as fronteiras sociológicas e orientou teorias pedagógicas focadas na construção do consenso e da moral laica.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Barra de Controles Discreta -->
+<div class="controls">
+  <!-- Bolinhas de Navegação -->
+  <div class="dots-container" id="dotsContainer"></div>
+
+  <button class="btn" id="prevBtn" onclick="prevSlide()">❮ Anterior</button>
+  <span class="counter" id="slideCounter">1 / 22</span>
+  <button class="btn" id="nextBtn" onclick="nextSlide()">Próximo ❯</button>
+  <button class="btn" onclick="toggleFullscreen()">📺 Tela Cheia</button>
+</div>
+
+<script>
+  let currentSlide = 0;
+  let isAnimating = false;
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('slideCounter');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('dotsContainer');
+
+  // Criação dinâmica das bolinhas sem números
+  function createDots() {
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === currentSlide) dot.classList.add('active');
+      dot.addEventListener('click', () => jumpToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  // Atualiza o estado visual da bolinha ativa
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+      if (index === currentSlide) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  // Mudança de página quase instantânea ao clicar na bolinha
+  function jumpToSlide(targetIndex) {
+    if (targetIndex === currentSlide || targetIndex < 0 || targetIndex >= slides.length) {
+      return;
+    }
+    
+    isAnimating = false;
+
+    slides.forEach(slide => {
+      slide.classList.remove('active', 'exit-left', 'exit-right', 'enter-left', 'enter-right');
+    });
+
+    currentSlide = targetIndex;
+    slides[currentSlide].classList.add('active');
+
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slides.length - 1;
+    updateDots();
+  }
+
+  function goToSlide(targetIndex, direction) {
+    if (isAnimating || targetIndex === currentSlide || targetIndex < 0 || targetIndex >= slides.length) {
+      return;
+    }
+    
+    isAnimating = true;
+    const oldSlide = slides[currentSlide];
+    const newSlide = slides[targetIndex];
+
+    const exitClass = direction === 'next' ? 'exit-left' : 'exit-right';
+    const enterClass = direction === 'next' ? 'enter-right' : 'enter-left';
+
+    // Limpa estados prévios
+    slides.forEach(slide => {
+      slide.classList.remove('active', 'exit-left', 'exit-right', 'enter-left', 'enter-right');
+    });
+
+    // Aplica classes de transição
+    oldSlide.classList.add(exitClass);
+    newSlide.classList.add(enterClass);
+
+    currentSlide = targetIndex;
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slides.length - 1;
+    updateDots();
+
+    // Conclui transição após fim da animação CSS (400ms)
+    setTimeout(() => {
+      oldSlide.classList.remove(exitClass);
+      newSlide.classList.remove(enterClass);
+      newSlide.classList.add('active');
+      isAnimating = false;
+    }, 400);
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      goToSlide(currentSlide + 1, 'next');
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      goToSlide(currentSlide - 1, 'prev');
+    }
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
+
+  // Controles pelo Teclado
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'Enter') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prevSlide();
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFullscreen();
+    }
+  });
+
+  // Estado Inicial
+  createDots();
+  prevBtn.disabled = true;
+</script>
+
+</body>
+</html>
