@@ -56,7 +56,8 @@
 .menu-div { /* usar na div da nav */
     display: inline-block;
     margin: 0px;
-    padding: 20px 30px 15px 30px;
+    /* clamp(valor mínimo, valor ideal, valor máximo) */
+    padding: 20px clamp(0px, 2vw, 30px) 15px clamp(0px, 2vw, 30px);
     height: 21px;
 }
 .menu-p { /* usar no p da div da nav */
