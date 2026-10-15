@@ -11,6 +11,9 @@
 .image {
     background-position: center;            
     background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 25vw;
     max-height: 400px;
     min-height: 290px;
